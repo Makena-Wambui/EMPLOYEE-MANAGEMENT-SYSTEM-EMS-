@@ -1,17 +1,19 @@
 import React from "react";
 import { useState } from "react";
+import axios from "axios";
 
 const Login = () => {
   {
     /* The Login component is responsible for rendering the login form. */
   }
 
-  {
-    /* The email and password state variables are used to store the values of the email and password input fields. */
-  }
+  /* The useState hook is used to create state variables in functional components.
+  The email and password state variables are used to store the values of the email and password input fields respectively.
+  The error state variable is used to store any error messages that occur during the login process. */
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior.
@@ -25,9 +27,17 @@ const Login = () => {
           password,
         }
       );
-      console.log(response);
+      // console.log(response);
+      if (response.data.token) {
+        alert("Login Successful"); // If the response contains a token, display a success message.
+      }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
+      if (error.response) {
+        setError(error.response.data.message); // Set the error message if the response contains an error message.
+      } else {
+        setError("An error occurred. Please try again."); // Set a generic error message if no error message is present in the response.
+      }
     }
   };
 
@@ -42,6 +52,8 @@ const Login = () => {
 
       <div className="border shadow p-6 w-80 bg-white">
         <h2 className="text-2xl font-bold mb-4">Login</h2>
+        {error && <p className="text-red-500 mb-4">{error}</p>}{" "}
+        {/* Display the error message if there is an error. */}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-700">
@@ -52,6 +64,7 @@ const Login = () => {
               className="w-full px-3 py-2 border"
               placeholder="Enter Email"
               onChange={(e) => setEmail(e.target.value)} // Set the value of the email input field to the email state variable.
+              required // Make the email input field required.
             />
           </div>
 
@@ -64,6 +77,7 @@ const Login = () => {
               className="w-full px-3 py-2 border"
               placeholder="**********"
               onChange={(e) => setPassword(e.target.value)} // Set the value of the password input field to the password state variable.
+              required // Make the password input field required.
             />
           </div>
 
