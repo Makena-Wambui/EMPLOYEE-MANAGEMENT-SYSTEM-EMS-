@@ -1,9 +1,36 @@
 import React from "react";
+import { useState } from "react";
 
 const Login = () => {
   {
     /* The Login component is responsible for rendering the login form. */
   }
+
+  {
+    /* The email and password state variables are used to store the values of the email and password input fields. */
+  }
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior.
+
+    try {
+      // Send a POST request to the /api/auth/login endpoint with the email and password in the request body.
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div
       className="flex flex-col items-center h-screen justify-center bg-gradient-to-b from-teal-600 from-50% to-gray-100 to-5
@@ -15,7 +42,7 @@ const Login = () => {
 
       <div className="border shadow p-6 w-80 bg-white">
         <h2 className="text-2xl font-bold mb-4">Login</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-700">
               Email
@@ -24,6 +51,7 @@ const Login = () => {
               type="email"
               className="w-full px-3 py-2 border"
               placeholder="Enter Email"
+              onChange={(e) => setEmail(e.target.value)} // Set the value of the email input field to the email state variable.
             />
           </div>
 
@@ -35,6 +63,7 @@ const Login = () => {
               type="password"
               className="w-full px-3 py-2 border"
               placeholder="**********"
+              onChange={(e) => setPassword(e.target.value)} // Set the value of the password input field to the password state variable.
             />
           </div>
 
