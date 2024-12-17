@@ -1,11 +1,14 @@
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
+import AdminSidebar from "../components/dashboard/AdminSidebar";
 import { useAuth } from "../context/authContext";
 
 const AdminDashboard = () => {
-  const { user, loading } = useAuth(); // Destructure the user object from the context.
+  const { user } = useAuth(); // Destructure the user object from the context.
 
+  /*
   const navigate = useNavigate(); // Use the useNavigate hook to navigate to different pages.
 
+  
   if (loading) {
     return <div>Loading...</div>; // If the user is loading, display a loading message
   }
@@ -16,10 +19,11 @@ const AdminDashboard = () => {
   }
 
   console.log(user); // To check if the user object is available.
+  */
 
   return (
     <div>
-      <h1>AdminDashboard {user?.name}</h1>
+      <AdminSidebar />
     </div>
   );
 };
