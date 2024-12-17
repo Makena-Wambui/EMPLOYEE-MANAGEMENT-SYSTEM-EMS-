@@ -25,16 +25,17 @@ const AuthContext = ({ children }) => {
               },
             }
           ); // Send a GET request to the /api/auth/verify endpoint to verify the user
-
+          console.log(response);
           if (response.data.user) {
             setUser(response.data.user); // If the response contains a user object, set the user state to the user object
           }
         } else {
           // navigate("/login"); // If the token is not present in local storage, navigate to the login page
           setUser(null);
+          setLoading(false); // Set the loading state to false
         }
       } catch (error) {
-        //console.error(error);
+        console.log(error);
         if (error.response) {
           // If the response contains an error message, navigate to the login page
           // navigate("/login");

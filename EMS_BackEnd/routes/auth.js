@@ -6,6 +6,6 @@ import authMiddleware from "../middleware/authMiddleware.js";
 const router = express.Router(); // create a new express router
 
 router.post("/login", login); // create a new route for POST requests to the /login endpoint
-router.post("/verify", authMiddleware, verify); // create a new route for POST requests to the /verify endpoint
+router.get("/verify", authMiddleware, verify); // create a new route for GET requests to the /verify endpoint
 
 export default router;

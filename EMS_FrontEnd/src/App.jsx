@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
 import EmployeeDashboard from "./pages/EmployeeDashboard";
+import PrivateRoutes from "./utils/PrivateRoutes";
+import RoleBaseRoutes from "./utils/RoleBaseRoutes";
 
 {
   /*
@@ -19,7 +21,18 @@ function App() {
           {/* Redirect to /admin-dashboard */}
           <Route path="/login" element={<Login />} />{" "}
           {/* Render the Login component */}
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />{" "}
+          <Route
+            path="/admin-dashboard"
+            element={
+              /* Wrap the AdminDashboard component with the PrivateRoutes and RoleBaseRoutes components  to ensure that only authenticated users with the role of "admin" can access the route */
+
+              <PrivateRoutes>
+                <RoleBaseRoutes requiredRole={["admin"]}>
+                  <AdminDashboard />
+                </RoleBaseRoutes>
+              </PrivateRoutes>
+            }
+          ></Route>
           {/* Render the AdminDashboard component */}
           <Route
             path="/employee-dashboard"
