@@ -1,4 +1,5 @@
 //import { useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import AdminSidebar from "../components/dashboard/AdminSidebar";
 import Navbar from "../components/dashboard/Navbar";
 import { useAuth } from "../context/authContext";
@@ -33,7 +34,7 @@ const AdminDashboard = () => {
         {" "}
         {/* Add a flex-1 class to the div to take up the remaining space */}
         <Navbar />
-        <AdminSummary />
+        <Outlet />
       </div>
     </div>
   );
