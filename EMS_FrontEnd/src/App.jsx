@@ -7,6 +7,7 @@ import RoleBaseRoutes from "./utils/RoleBaseRoutes";
 import AdminSummary from "./pages/AdminSummary";
 import DepartmentList from "./components/departments/DepartmentList";
 import AddDepartment from "./components/departments/AddDepartment";
+import EditDepartment from "./components/departments/EditDepartment";
 
 {
   /*
@@ -37,6 +38,7 @@ function App() {
             }
           >
             <Route index element={<AdminSummary />}></Route>
+
             <Route
               path="/admin-dashboard/departments"
               element={<DepartmentList />}
@@ -54,6 +56,11 @@ function App() {
           />{" "}
           {/* Render the EmployeeDashboard component */}
         </Route>
+
+        <Route
+          path="admin-dashboard/department/:id"
+          element={<EditDepartment />}
+        ></Route>
       </Routes>
     </BrowserRouter>
   );
