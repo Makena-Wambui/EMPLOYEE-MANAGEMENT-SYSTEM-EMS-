@@ -10,6 +10,11 @@ const DepartmentList = () => {
   const [departments, setDepartments] = useState([]); // Define a state variable to store the departments
   const [depLoading, setDepLoading] = useState(false); // Define a state variable to store the loading state of the departments
 
+  const onDepartmentDelete = async (id) => {
+    const data = departments.filter((dep) => dep._id !== id); // Filter out the department with the given id
+
+    setDepartments(data); // Set the departments state variable with the filtered departments
+  };
   useEffect(() => {
     const fetchDepartments = async () => {
       // Fetch the departments from the backend
@@ -30,7 +35,12 @@ const DepartmentList = () => {
             _id: dep._id,
             s_no: s_no++, // Increment the serial number
             dep_name: dep.dep_name, // Get the department name
-            actions: <DepartmentButtons DepId={dep._id} />,
+            actions: (
+              <DepartmentButtons
+                DepId={dep._id}
+                onDepartmentDelete={onDepartmentDelete}
+              />
+            ),
           }));
           setDepartments(data); // Set the departments state variable with the fetched departments
         }

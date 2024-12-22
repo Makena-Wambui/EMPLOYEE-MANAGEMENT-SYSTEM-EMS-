@@ -66,4 +66,28 @@ const updateDepartment = async (req, res) => {
   }
 };
 
-export { addDepartment, getDepartments, getDepartment, updateDepartment }; // Export the addDepartment and getDepartments functions
+const deleteDepartment = async (req, res) => {
+  try {
+    const { id } = req.params; // Get the department id from the request parameters
+    // const { dep_name, description } = req.body; // Destructure the department name and description from the request body
+
+    const deletedDep = await Department.findByIdAndDelete(
+      { _id: id } // Find the department by id and delete it
+    );
+    return res.status(200).json({
+      success: true,
+      department: deletedDep,
+      message: "Department deleted successfully",
+    }); // Return a success response with status code 200
+  } catch (error) {
+    res.status(500).json({ error: "Server error in delete department" }); // Return an error response with status code 500
+  }
+};
+
+export {
+  addDepartment,
+  getDepartments,
+  getDepartment,
+  updateDepartment,
+  deleteDepartment,
+}; // Export the addDepartment and getDepartments functions
