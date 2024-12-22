@@ -9,11 +9,14 @@ import { DepartmentButtons } from "../../utils/DepartmentHelper"; // Import the 
 const DepartmentList = () => {
   const [departments, setDepartments] = useState([]); // Define a state variable to store the departments
   const [depLoading, setDepLoading] = useState(false); // Define a state variable to store the loading state of the departments
+  const [filteredDepartments, setFilteredDepartments] = useState([]); // Define a state variable to store the filtered departments
+  const [searchValue, setSearchValue] = useState(""); // Search value state
 
   const onDepartmentDelete = async (id) => {
     const data = departments.filter((dep) => dep._id !== id); // Filter out the department with the given id
 
     setDepartments(data); // Set the departments state variable with the filtered departments
+    setFilteredDepartments(data); // Set the filtered departments state variable with the filtered departments
   };
   useEffect(() => {
     const fetchDepartments = async () => {
@@ -43,6 +46,7 @@ const DepartmentList = () => {
             ),
           }));
           setDepartments(data); // Set the departments state variable with the fetched departments
+          setFilteredDepartments(data); // Set the filtered departments state variable with the fetched departments
         }
       } catch (error) {
         if (error.response && !error.response.data.success) {
@@ -54,6 +58,15 @@ const DepartmentList = () => {
     };
     fetchDepartments(); // Call the fetchDepartments function to fetch the departments
   }, []);
+
+  const filterDepartments = (e) => {
+    const value = e.target.value.toLowerCase(); // Get the search value
+    setSearchValue(value); // Set the search value state variable
+    const filteredData = departments.filter((dep) =>
+      dep.dep_name.toLowerCase().includes(value)
+    ); // Filter the departments based on the search value
+    setFilteredDepartments(filteredData); // Set the departments state variable with the filtered departments
+  };
 
   return (
     // Return the DepartmentList component
@@ -71,6 +84,8 @@ const DepartmentList = () => {
               type="text"
               placeholder="Search by Dept. Name"
               className="px-4 py-0.5 border"
+              value={searchValue}
+              onChange={filterDepartments}
             />
             <Link
               to="/admin-dashboard/add-department"
@@ -80,13 +95,7 @@ const DepartmentList = () => {
             </Link>
           </div>
           <div className="mt-5">
-            <DataTable
-              //title="Departments"
-              columns={columns}
-              data={departments}
-              //pagination
-              //paginationPerPage={5}
-            />
+            <DataTable columns={columns} data={filteredDepartments} />
           </div>
         </div>
       )}
