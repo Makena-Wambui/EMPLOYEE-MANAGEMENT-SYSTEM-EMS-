@@ -95,7 +95,11 @@ const DepartmentList = () => {
             </Link>
           </div>
           <div className="mt-5">
-            <DataTable columns={columns} data={filteredDepartments} />
+            <DataTable
+              columns={columns}
+              data={filteredDepartments}
+              pagination // Enable pagination
+            />
           </div>
         </div>
       )}

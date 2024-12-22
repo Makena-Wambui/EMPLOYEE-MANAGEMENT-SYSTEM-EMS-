@@ -11,7 +11,7 @@ export const columns = [
   {
     name: "Department Name",
     selector: (row) => row.dep_name, // Define the selector to get the department name
-    //sortable: true,
+    sortable: true, // Enable sorting for the department name
   },
   {
     name: "Actions",
