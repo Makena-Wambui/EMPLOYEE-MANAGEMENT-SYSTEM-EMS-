@@ -16,7 +16,7 @@ const DepartmentList = () => {
       setDepLoading(true); // Set the loading state to true
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/department",
+          "http://localhost:5000/api/department/",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -24,12 +24,13 @@ const DepartmentList = () => {
           }
         ); // Make a GET request to the /api/department endpoint
         if (response.data.success) {
+          console.log(response.data);
           let s_no = 1; // Initialize the serial number
           const data = await response.data.departments.map((dep) => ({
             _id: dep._id,
             s_no: s_no++, // Increment the serial number
             dep_name: dep.dep_name, // Get the department name
-            actions: <DepartmentButtons id={dep._id} />,
+            actions: <DepartmentButtons DepId={dep._id} />,
           }));
           setDepartments(data); // Set the departments state variable with the fetched departments
         }

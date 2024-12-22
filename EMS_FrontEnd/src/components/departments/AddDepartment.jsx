@@ -33,7 +33,7 @@ const AddDepartment = () => {
       ); // Make a POST request to the server to add a new department
 
       if (response.data.success) {
-        navigate(`/admin-dashboard/departments/${_id}`); // Redirect to the department list page
+        navigate("/admin-dashboard/departments"); // Redirect to the department list page
       }
     } catch (error) {
       if (error.response && error.response.data.error) {

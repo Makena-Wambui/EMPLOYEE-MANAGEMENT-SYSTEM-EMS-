@@ -31,4 +31,39 @@ const addDepartment = async (req, res) => {
   }
 };
 
-export { addDepartment, getDepartments }; // Export the addDepartment and getDepartments functions
+const getDepartment = async (req, res) => {
+  try {
+    const { id } = req.params; // Get the department id from the request parameters
+
+    const department = await Department.findById({ _id: id }); // Find the department by id
+
+    console.log(department);
+
+    return res.status(200).json({ success: true, department }); // Return a success response with status code 200
+  } catch (error) {
+    res.status(500).json({ error: "Server error in get department" }); // Return an error response with status code 500
+  }
+};
+
+const updateDepartment = async (req, res) => {
+  try {
+    const { id } = req.params; // Get the department id from the request parameters
+    const { dep_name, description } = req.body; // Destructure the department name and description from the request body
+
+    const updatedDep = await Department.findByIdAndUpdate(
+      { _id: id }, // Find the department by id
+      { dep_name, description }, // Update the department name and description
+      { new: true } // Return the updated department
+    ); // Find the department by id and update the department name and description
+    console.log(updatedDep);
+    return res.status(200).json({
+      success: true,
+      department: updatedDep,
+      message: "Department updated successfully",
+    }); // Return a success response with status code 200
+  } catch (error) {
+    res.status(500).json({ error: "Server error in update department" }); // Return an error response with status code 500
+  }
+};
+
+export { addDepartment, getDepartments, getDepartment, updateDepartment }; // Export the addDepartment and getDepartments functions
