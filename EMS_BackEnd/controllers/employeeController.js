@@ -82,4 +82,20 @@ const addEmployee = async (req, res) => {
   }
 };
 
-export { addEmployee, upload };
+// Get all employees
+const getEmployees = async (req, res) => {
+  try {
+    const employees = await Employee.find()
+      .populate("userId", { password: 0 })
+      .populate("department"); // Find all employees and populate the user and department fields
+
+    return res.status(200).json({
+      success: true,
+      employees,
+    }); // Return a success response with status code 200
+  } catch (error) {
+    res.status(500).json({ error: "Server error in get employees" }); // Return an error response with status code 500
+  }
+};
+
+export { addEmployee, upload, getEmployees };

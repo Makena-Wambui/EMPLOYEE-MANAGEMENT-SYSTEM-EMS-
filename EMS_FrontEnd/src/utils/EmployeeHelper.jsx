@@ -1,4 +1,39 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+export const columns = [
+  /* Define columns for the department table */
+  {
+    name: "S No.",
+    selector: (row) => row.s_no, // Define the selector to get the serial number of the department
+    // sortable: true,
+  },
+  {
+    name: "Name",
+    selector: (row) => row.name, // Define the selector to get the employee name
+    sortable: true, // Enable sorting for the employee name
+  },
+
+  {
+    name: "Image",
+    selector: (row) => row.profileImage, // Define the selector to get the profile image of the employee
+  },
+
+  {
+    name: "Department",
+    selector: (row) => row.dep_name, // Define the selector to get the department name
+  },
+
+  {
+    name: "DOB",
+    selector: (row) => row.dob, // Define the selector to get the department name
+    sortable: true, // Enable sorting for the department name
+  },
+  {
+    name: "Actions",
+    selector: (row) => row.actions, // Define the selector to get the actions for the department
+  },
+];
 
 export const fetchDepartments = async () => {
   let departments;
@@ -18,4 +53,31 @@ export const fetchDepartments = async () => {
     }
   }
   return departments;
+};
+
+export const EmployeeButtons = ({ Id }) => {
+  const navigate = useNavigate(); // Get the navigate function from the useNavigate hook
+
+  // Return the buttons for the employee actions
+  return (
+    <div className="flex space-x-3">
+      <button
+        className="px-3 py-1 bg-blue-600 rounded text-white mr-2"
+        // onClick={() => navigate(`/admin-dashboard/department/${Id}`)} // Navigate to the department details page
+      >
+        View
+      </button>
+      <button className="px-1 py-1 bg-purple-600 rounded text-white">
+        Edit
+      </button>
+
+      <button className="px-3 py-1 bg-green-600 rounded text-white">
+        Salary
+      </button>
+
+      <button className="px-3 py-1 bg-orange-600 rounded text-white">
+        Leave
+      </button>
+    </div>
+  );
 };
