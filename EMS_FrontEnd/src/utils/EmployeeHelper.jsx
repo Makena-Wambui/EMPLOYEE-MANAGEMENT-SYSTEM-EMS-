@@ -69,7 +69,7 @@ export const EmployeeButtons = ({ Id }) => {
     <div className="flex space-x-3">
       <button
         className="px-3 py-1 bg-blue-600 rounded text-white mr-2"
-        // onClick={() => navigate(`/admin-dashboard/department/${Id}`)} // Navigate to the department details page
+        onClick={() => navigate(`/admin-dashboard/employees/${Id}`)} // Navigate to the department details page
       >
         View
       </button>
