@@ -7,31 +7,37 @@ export const columns = [
     name: "S No.",
     selector: (row) => row.s_no, // Define the selector to get the serial number of the department
     // sortable: true,
+    width: "70px", // Set the width of the column
   },
   {
     name: "Name",
     selector: (row) => row.name, // Define the selector to get the employee name
     sortable: true, // Enable sorting for the employee name
+    width: "120px",
   },
 
   {
     name: "Image",
     selector: (row) => row.profileImage, // Define the selector to get the profile image of the employee
+    width: "120px",
   },
 
   {
     name: "Department",
     selector: (row) => row.dep_name, // Define the selector to get the department name
+    width: "120px",
   },
 
   {
     name: "DOB",
     selector: (row) => row.dob, // Define the selector to get the department name
     sortable: true, // Enable sorting for the department name
+    width: "200px",
   },
   {
     name: "Actions",
     selector: (row) => row.actions, // Define the selector to get the actions for the department
+    center: true, // Center align the content
   },
 ];
 
@@ -67,7 +73,7 @@ export const EmployeeButtons = ({ Id }) => {
       >
         View
       </button>
-      <button className="px-1 py-1 bg-purple-600 rounded text-white">
+      <button className="px-3 py-1 bg-yellow-500 rounded text-white">
         Edit
       </button>
 

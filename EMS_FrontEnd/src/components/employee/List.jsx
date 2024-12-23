@@ -27,7 +27,7 @@ const List = () => {
             s_no: s_no++, // Increment the serial number
             dep_name: emp.department.dep_name, // Get the department name
             name: emp.userId.name, // Get the employee name
-            dob: new Date(emp.dob).toDateString(), // Get the employee date of birth
+            dob: new Date(emp.dob).toLocaleDateString(), // Get the employee date of birth
             profileImage: (
               <img
                 width={40}
