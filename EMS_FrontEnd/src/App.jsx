@@ -11,6 +11,7 @@ import EditDepartment from "./components/departments/EditDepartment";
 import List from "./components/employee/List";
 import Add from "./components/employee/Add";
 import View from "./components/employee/View";
+import Edit from "./components/employee/Edit";
 
 /*
  * The App component is the root component of the application.
@@ -40,6 +41,7 @@ function App() {
           <Route path="employees" element={<List />} />
           <Route path="add-employee" element={<Add />} />
           <Route path="employees/:id" element={<View />} />
+          <Route path="employees/edit/:id" element={<Edit />} />
         </Route>
         <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
       </Routes>

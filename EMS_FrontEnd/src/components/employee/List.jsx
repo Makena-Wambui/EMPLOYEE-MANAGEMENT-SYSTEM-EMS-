@@ -8,6 +8,7 @@ import DataTable from "react-data-table-component";
 const List = () => {
   const [employees, setEmployees] = useState([]); // Define a state variable to store the employees
   const [empLoading, setEmpLoading] = useState(false); // Define a state variable to store the loading state of the employees
+  const [filteredEmployee, setFilteredEmployee] = useState([]); // Define a state variable to store the filtered employees
 
   useEffect(() => {
     const fetchEmployees = async () => {
@@ -38,7 +39,8 @@ const List = () => {
             actions: <EmployeeButtons Id={emp._id} />,
           }));
 
-          setEmployees(data); // Set the departments state variable with the fetched departments
+          setEmployees(data); // Set the employees state variable with the fetched employees
+          setFilteredEmployee(data); // Set the filtered employees state variable with the fetched employees
         }
       } catch (error) {
         if (error.response && !error.response.data.success) {
@@ -50,6 +52,14 @@ const List = () => {
     };
     fetchEmployees(); // Call the fetchDepartments function to fetch the departments
   }, []);
+
+  const handleFilter = (e) => {
+    const searchValue = e.target.value.toLowerCase(); // Get the search value
+    const filteredData = employees.filter((emp) =>
+      emp.name.toLowerCase().includes(searchValue)
+    ); // Filter the employees based on the search value
+    setFilteredEmployee(filteredData); // Set the filtered employees state variable with the filtered data
+  };
   return (
     <div className="p-5">
       <div className="p-5">
@@ -60,8 +70,9 @@ const List = () => {
         <div className="flex justify-between items-center">
           <input
             type="text"
-            placeholder="Search by Dept. Name"
+            placeholder="Search by Emp Name"
             className="px-4 py-0.5 border"
+            onChange={handleFilter}
           />
           <Link
             to="/admin-dashboard/add-employee"
@@ -70,8 +81,8 @@ const List = () => {
             Add New Employee
           </Link>
         </div>
-        <div>
-          <DataTable columns={columns} data={employees} />
+        <div className="mt-5">
+          <DataTable columns={columns} data={filteredEmployee} pagination />
         </div>
       </div>
     </div>

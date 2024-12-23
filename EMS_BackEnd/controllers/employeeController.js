@@ -1,6 +1,7 @@
 import path from "path";
 import Employee from "../models/Employee.js"; // Import Employee model
 import User from "../models/user.js"; // Import User model
+import Department from "../models/department.js"; // Import Department model
 import bcrypt from "bcrypt"; // Import bcrypt for password hashing
 import multer from "multer"; // Import multer for file upload
 
@@ -114,4 +115,47 @@ const getEmployee = async (req, res) => {
   }
 };
 
-export { addEmployee, upload, getEmployees, getEmployee };
+const updateEmployee = async (req, res) => {
+  try {
+    const { id } = req.params; // Get the id from the request parameters
+    const { name, maritalStatus, designation, salary, department } = req.body; // Get the updated employee details from the request body
+
+    const employee = await Employee.findById(id); // Find the employee by id
+
+    if (!employee) {
+      return res
+        .status(404)
+        .json({ success: false, error: "Employee not found" }); // Return an error response with status code 404
+    }
+
+    const user = await User.findById(employee.userId); // Find the user by id
+
+    if (!user) {
+      return res.status(404).json({ success: false, error: "User not found" }); // Return an error response with status code 404
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      { _id: employee.userId },
+      { name },
+      { new: true }
+    ); // Update the user details
+    const updatedEmployee = await Employee.findByIdAndUpdate(
+      { _id: id },
+      { maritalStatus, designation, salary, department },
+      { new: true }
+    ); // Update the employee details
+
+    if (!updatedUser || !updatedEmployee) {
+      return res.status(404).json({ success: false, error: "Doc Not Found" }); // Return an error response with status code 500
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Employee updated successfully",
+    }); // Return a success response with status code 200
+  } catch (error) {
+    res.status(500).json({ error: "Server error in updating employee" }); // Return an error response with status code 500
+  }
+};
+
+export { addEmployee, upload, getEmployees, getEmployee, updateEmployee };
