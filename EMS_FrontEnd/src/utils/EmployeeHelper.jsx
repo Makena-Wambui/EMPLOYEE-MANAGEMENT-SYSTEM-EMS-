@@ -61,6 +61,29 @@ export const fetchDepartments = async () => {
   return departments;
 };
 
+export const getEmployees = async (id) => {
+  let employees;
+  // Fetch the employees from the backend
+  try {
+    const response = await axios.get(
+      `http://localhost:5000/api/employee/department/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    ); // Make a GET request to the /api/employee/department/:id endpoint
+    if (response.data.success) {
+      employees = response.data.employees; // Get the employees
+    }
+  } catch (error) {
+    if (error.response && !error.response.data.success) {
+      alert(error.response.data.error); // Log the error message
+    }
+  }
+  return employees;
+};
+
 export const EmployeeButtons = ({ Id }) => {
   const navigate = useNavigate(); // Get the navigate function from the useNavigate hook
 
@@ -80,7 +103,10 @@ export const EmployeeButtons = ({ Id }) => {
         Edit
       </button>
 
-      <button className="px-3 py-1 bg-green-600 rounded text-white">
+      <button
+        className="px-3 py-1 bg-green-600 rounded text-white"
+        onClick={() => navigate(`/admin-dashboard/employees/salary/${Id}`)}
+      >
         Salary
       </button>
 

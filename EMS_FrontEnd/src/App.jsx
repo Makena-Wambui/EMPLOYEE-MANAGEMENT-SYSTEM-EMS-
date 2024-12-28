@@ -13,6 +13,7 @@ import Add from "./components/employee/Add";
 import View from "./components/employee/View";
 import Edit from "./components/employee/Edit";
 import AddSalary from "./components/salary/Add";
+import ViewSalary from "./components/salary/View";
 
 /*
  * The App component is the root component of the application.
@@ -36,16 +37,27 @@ function App() {
           }
         >
           <Route index element={<AdminSummary />} />
-          <Route path="departments" element={<DepartmentList />} />
-          <Route path="add-department" element={<AddDepartment />} />
-          <Route path="department/:id" element={<EditDepartment />} />
-          <Route path="employees" element={<List />} />
-          <Route path="add-employee" element={<Add />} />
-          <Route path="employees/:id" element={<View />} />
-          <Route path="employees/edit/:id" element={<Edit />} />
-          <Route path="salary/add" element={<AddSalary />} />
+          <Route path="departments" element={<DepartmentList />} />{" "}
+          {/* Define the route for the DepartmentList component */}
+          <Route path="add-department" element={<AddDepartment />} />{" "}
+          {/* Define the route for the AddDepartment component */}
+          <Route path="department/:id" element={<EditDepartment />} />{" "}
+          {/* Define the route for the EditDepartment component */}
+          <Route path="employees" element={<List />} />{" "}
+          {/* Define the route for the List component */}
+          <Route path="add-employee" element={<Add />} />{" "}
+          {/* Define the route for the Add component */}
+          <Route path="employees/:id" element={<View />} />{" "}
+          {/* Define the route for the View component */}
+          <Route path="employees/edit/:id" element={<Edit />} />{" "}
+          {/* Define the route for the Edit component */}
+          <Route path="employees/salary/:id" element={<ViewSalary />} />{" "}
+          {/* Define the route for the View component */}
+          <Route path="salary/add" element={<AddSalary />} />{" "}
+          {/* Define the route for the AddSalary component */}
         </Route>
-        <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
+        <Route path="/employee-dashboard" element={<EmployeeDashboard />} />{" "}
+        {/* Define the route for the EmployeeDashboard component */}
       </Routes>
     </BrowserRouter>
   );

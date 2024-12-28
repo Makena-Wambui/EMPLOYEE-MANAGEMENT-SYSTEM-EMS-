@@ -27,4 +27,19 @@ const addSalary = async (req, res) => {
   }
 };
 
-export { addSalary };
+const getSalary = async (req, res) => {
+  try {
+    const { id } = req.params; // Get the employee id from the request params
+    const salary = await Salary.find({ employeeId: id }).populate(
+      "employeeId",
+      "employeeId"
+    ); // Find the salary history of the employee with the given id
+    res.status(200).json({ success: true, salary }); // Send the response
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, error: "Error when getting salary" }); // Send the error
+  }
+};
+
+export { addSalary, getSalary };
