@@ -14,6 +14,7 @@ import View from "./components/employee/View";
 import Edit from "./components/employee/Edit";
 import AddSalary from "./components/salary/Add";
 import ViewSalary from "./components/salary/View";
+import Summary from "./components/EmployeeDashboard/Summary";
 
 /*
  * The App component is the root component of the application.
@@ -56,8 +57,18 @@ function App() {
           <Route path="salary/add" element={<AddSalary />} />{" "}
           {/* Define the route for the AddSalary component */}
         </Route>
-        <Route path="/employee-dashboard" element={<EmployeeDashboard />} />{" "}
-        {/* Define the route for the EmployeeDashboard component */}
+        <Route
+          path="/employee-dashboard"
+          element={
+            <PrivateRoutes>
+              <RoleBaseRoutes requiredRole={["admin", "employee"]}>
+                <EmployeeDashboard />
+              </RoleBaseRoutes>
+            </PrivateRoutes>
+          }
+        >
+          <Route index element={<Summary />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

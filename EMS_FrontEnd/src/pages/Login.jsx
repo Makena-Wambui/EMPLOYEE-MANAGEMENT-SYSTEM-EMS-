@@ -1,9 +1,7 @@
-import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { useAuth } from "../context/authContext";
-// import { use } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/authContext.jsx";
 
 const Login = () => {
   {
@@ -17,7 +15,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const { login } = useAuth();
+  const { login } = useAuth(); // Get the login function from the auth context.
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -37,7 +35,7 @@ const Login = () => {
       if (response.data.token) {
         // alert("Login Successful"); // If the response contains a token, display a success message.
         login(response.data.user); // Call the login function with the user object from the response.
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.data.token); // Store the token in local storage.
 
         if (response.data.user.role === "admin") {
           // Redirect the user to the admin dashboard if the user is an admin.
