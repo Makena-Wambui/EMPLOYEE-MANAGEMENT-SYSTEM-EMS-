@@ -38,24 +38,15 @@ function App() {
           }
         >
           <Route index element={<AdminSummary />} />
-          <Route path="departments" element={<DepartmentList />} />{" "}
-          {/* Define the route for the DepartmentList component */}
-          <Route path="add-department" element={<AddDepartment />} />{" "}
-          {/* Define the route for the AddDepartment component */}
-          <Route path="department/:id" element={<EditDepartment />} />{" "}
-          {/* Define the route for the EditDepartment component */}
-          <Route path="employees" element={<List />} />{" "}
-          {/* Define the route for the List component */}
-          <Route path="add-employee" element={<Add />} />{" "}
-          {/* Define the route for the Add component */}
-          <Route path="employees/:id" element={<View />} />{" "}
-          {/* Define the route for the View component */}
-          <Route path="employees/edit/:id" element={<Edit />} />{" "}
-          {/* Define the route for the Edit component */}
-          <Route path="employees/salary/:id" element={<ViewSalary />} />{" "}
-          {/* Define the route for the View component */}
-          <Route path="salary/add" element={<AddSalary />} />{" "}
-          {/* Define the route for the AddSalary component */}
+          <Route path="departments" element={<DepartmentList />} />
+          <Route path="add-department" element={<AddDepartment />} />
+          <Route path="department/:id" element={<EditDepartment />} />
+          <Route path="employees" element={<List />} />
+          <Route path="add-employee" element={<Add />} />
+          <Route path="employees/:id" element={<View />} />
+          <Route path="employees/edit/:id" element={<Edit />} />
+          <Route path="employees/salary/:id" element={<ViewSalary />} />
+          <Route path="salary/add" element={<AddSalary />} />
         </Route>
         <Route
           path="/employee-dashboard"
@@ -68,6 +59,7 @@ function App() {
           }
         >
           <Route index element={<Summary />} />
+          <Route path="profile/:id" element={<View />} />
         </Route>
       </Routes>
     </BrowserRouter>
