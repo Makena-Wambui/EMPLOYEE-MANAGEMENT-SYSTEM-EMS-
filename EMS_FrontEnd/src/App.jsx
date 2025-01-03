@@ -15,6 +15,8 @@ import Edit from "./components/employee/Edit";
 import AddSalary from "./components/salary/Add";
 import ViewSalary from "./components/salary/View";
 import Summary from "./components/EmployeeDashboard/Summary";
+import LeaveList from "./components/leave/List";
+import AddLeave from "./components/leave/Add";
 
 /*
  * The App component is the root component of the application.
@@ -60,6 +62,8 @@ function App() {
         >
           <Route index element={<Summary />} />
           <Route path="profile/:id" element={<View />} />
+          <Route path="leaves" element={<LeaveList />} />
+          <Route path="add-leave" element={<AddLeave />} />
         </Route>
       </Routes>
     </BrowserRouter>

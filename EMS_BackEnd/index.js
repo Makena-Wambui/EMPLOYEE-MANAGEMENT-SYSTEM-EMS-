@@ -5,6 +5,7 @@ import departmentRouter from "./routes/department.js";
 import employeeRouter from "./routes/employee.js";
 import connectToDatabase from "./database/database.js";
 import salaryRouter from "./routes/salary.js";
+import leaveRouter from "./routes/leave.js";
 
 connectToDatabase(); // connect to the database
 const app = express(); // create express app
@@ -22,6 +23,8 @@ app.use("/api/department", departmentRouter); // use the departmentRouter for al
 app.use("/api/employee", employeeRouter); // use the employeeRouter for all requests to the /employee endpoint
 
 app.use("/api/salary", salaryRouter); // use the salaryRouter for all requests to the /salary endpoint
+
+app.use("/api/leave", leaveRouter); // use the leaveRouter for all requests to the /leave endpoint
 
 app.listen(process.env.PORT, () => {
   /*
