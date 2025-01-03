@@ -64,6 +64,7 @@ function App() {
           <Route path="profile/:id" element={<View />} />
           <Route path="leaves" element={<LeaveList />} />
           <Route path="add-leave" element={<AddLeave />} />
+          <Route path="salary/:id" element={<ViewSalary />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -8,8 +8,10 @@ import {
   FaTachometerAlt,
   FaUsers,
 } from "react-icons/fa"; // Import the FaTachometerAlt icon from react-icons/fa for the dashboard icons.
+import { useAuth } from "../../context/authContext"; // Import the useAuth hook from the auth context for accessing the user object.
 
 const Sidebar = () => {
+  const { user } = useAuth(); // Get the user object from the auth context.
   return (
     <div className="bg-gray-800 text-white h-screen fixed left-0 top-0 bottom-0 space-y-2 w-64">
       {/* Design the Sidebar */}
@@ -32,7 +34,7 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink
-          to="/employee-dashboard/profile"
+          to={`/employee-dashboard/profile/${user._id}`} // Add the user ID to the profile route
           className={({ isActive }) =>
             `${
               isActive ? "bg-teal-600" : " "
@@ -56,7 +58,7 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink
-          to="/employee-dashboard/salary"
+          to={`/employee-dashboard/salary/${user._id}`} // Add the user ID to the salary route
           className={({ isActive }) =>
             `${
               isActive ? "bg-teal-600" : " "
