@@ -55,7 +55,7 @@ export const LeaveButtons = ({ Id }) => {
   const navigate = useNavigate(); // Initialize the navigate function from the useNavigate hook
 
   const handleView = (id) => {
-    navigate(`/admin-dashboard/leave/${id}`); // Redirect to the view leave page
+    navigate(`/admin-dashboard/leaves/${id}`); // Redirect to the view leave page with the leave ID as a parameter
   };
 
   return (

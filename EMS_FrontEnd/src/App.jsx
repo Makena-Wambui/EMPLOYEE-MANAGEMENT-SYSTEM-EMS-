@@ -19,6 +19,7 @@ import LeaveList from "./components/leave/List";
 import AddLeave from "./components/leave/Add";
 import Setting from "./components/EmployeeDashboard/Setting";
 import Table from "./components/leave/Table";
+import Detail from "./components/leave/Detail";
 
 /*
  * The App component is the root component of the application.
@@ -63,6 +64,8 @@ function App() {
           {/* AddSalary component is rendered when the route is /admin-dashboard/salary/add */}
           <Route path="leaves" element={<Table />} />{" "}
           {/* Table component is rendered when the route is /admin-dashboard/leaves */}
+          <Route path="leaves/:id" element={<Detail />} />{" "}
+          {/* Detail component is rendered when the route is /admin-dashboard/leaves/:id */}
         </Route>
         <Route
           path="/employee-dashboard"

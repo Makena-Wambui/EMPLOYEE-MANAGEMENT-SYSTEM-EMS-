@@ -74,8 +74,11 @@ const Table = () => {
               </button>
             </div>
           </div>
-          <DataTable columns={columns} data={leaves} pagination />{" "}
-          {/*Render the DataTable component with the columns and data props */}
+
+          <div className="mt-5">
+            <DataTable columns={columns} data={leaves} pagination />{" "}
+            {/*Render the DataTable component with the columns and data props */}
+          </div>
         </div>
       ) : (
         <div>Loading...</div>
