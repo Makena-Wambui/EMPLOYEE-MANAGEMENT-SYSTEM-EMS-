@@ -27,6 +27,8 @@ app.use("/api/salary", salaryRouter); // use the salaryRouter for all requests t
 
 app.use("/api/leave", leaveRouter); // use the leaveRouter for all requests to the /leave endpoint
 
+//app.use("/api/leaves", leaveRouter); // use the leaveRouter for all requests to the /leaves endpoint
+
 app.use("/api/setting", settingRouter); // use the settingRouter for all requests to the /setting endpoint
 
 app.listen(process.env.PORT, () => {

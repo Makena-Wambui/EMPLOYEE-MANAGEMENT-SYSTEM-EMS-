@@ -35,7 +35,7 @@ const AdminSidebar = () => {
             `${
               isActive ? "bg-teal-600" : " "
             } flex items-center space-x-4 py-3 px-4 rounded`
-          }
+          } // Add the isActive prop to the NavLink component to change the background color of the active link.
         >
           <FaUsers />
           <span>Employees</span>
@@ -54,16 +54,24 @@ const AdminSidebar = () => {
         </NavLink>
 
         <NavLink
-          to="/admin-dashboard"
-          className="flex items-center space-x-4 py-3 px-4 rounded"
+          to="/admin-dashboard/leaves"
+          className={({ isActive }) =>
+            `${
+              isActive ? "bg-teal-600" : " "
+            } flex items-center space-x-4 py-3 px-4 rounded`
+          }
         >
           <FaCalendarAlt />
-          <span>Leave</span>
+          <span>Leaves</span>
         </NavLink>
 
         <NavLink
-          to="/admin-dashboard"
-          className="flex items-center space-x-4 py-3 px-4 rounded"
+          to="/admin-dashboard/salary/add"
+          className={({ isActive }) =>
+            `${
+              isActive ? "bg-teal-600" : " "
+            } flex items-center space-x-4 py-3 px-4 rounded`
+          }
         >
           <FaMoneyBillWave />
           <span>Salary</span>

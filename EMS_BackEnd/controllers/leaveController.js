@@ -35,7 +35,7 @@ const addLeave = async (req, res) => {
   }
 };
 
-const getLeaves = async (req, res) => {
+const getLeave = async (req, res) => {
   try {
     const { id } = req.params; // Get the employee ID from the request parameters
 
@@ -51,11 +51,36 @@ const getLeaves = async (req, res) => {
 
     // console.log("Leaves found:", leaves);
 
-    res.status(200).json({ success: true, data: leaves }); // Send the response
+    return res.status(200).json({ success: true, data: leaves }); // Send the response
   } catch (error) {
-    res
+    return res
       .status(500)
       .json({ success: false, error: "Error when getting leaves" }); // Send the error
   }
 };
-export { addLeave, getLeaves };
+
+const getLeaves = async (req, res) => {
+  try {
+    const leaves = await Leave.find().populate({
+      path: "employeeId",
+      populate: [
+        {
+          path: "department",
+          select: "dep_name",
+        },
+
+        {
+          path: "userId",
+          select: "name",
+        },
+      ],
+    }); // Find all the leave records and populate the employee ID field
+
+    return res.status(200).json({ success: true, data: leaves }); // Send the response
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, error: "Error when getting leaves" }); // Send the error
+  }
+};
+export { addLeave, getLeave, getLeaves };

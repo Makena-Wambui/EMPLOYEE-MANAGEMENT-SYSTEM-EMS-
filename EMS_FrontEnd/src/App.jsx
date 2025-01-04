@@ -18,6 +18,7 @@ import Summary from "./components/EmployeeDashboard/Summary";
 import LeaveList from "./components/leave/List";
 import AddLeave from "./components/leave/Add";
 import Setting from "./components/EmployeeDashboard/Setting";
+import Table from "./components/leave/Table";
 
 /*
  * The App component is the root component of the application.
@@ -40,16 +41,28 @@ function App() {
             </PrivateRoutes>
           }
         >
-          <Route index element={<AdminSummary />} />
-          <Route path="departments" element={<DepartmentList />} />
-          <Route path="add-department" element={<AddDepartment />} />
-          <Route path="department/:id" element={<EditDepartment />} />
-          <Route path="employees" element={<List />} />
-          <Route path="add-employee" element={<Add />} />
-          <Route path="employees/:id" element={<View />} />
-          <Route path="employees/edit/:id" element={<Edit />} />
-          <Route path="employees/salary/:id" element={<ViewSalary />} />
-          <Route path="salary/add" element={<AddSalary />} />
+          <Route index element={<AdminSummary />} />{" "}
+          {/* AdminSummary component is rendered when the route is /admin-dashboard */}
+          <Route path="departments" element={<DepartmentList />} />{" "}
+          {/* DepartmentList component is rendered when the route is /admin-dashboard/departments */}
+          <Route path="add-department" element={<AddDepartment />} />{" "}
+          {/* AddDepartment component is rendered when the route is /admin-dashboard/add-department */}
+          <Route path="department/:id" element={<EditDepartment />} />{" "}
+          {/* EditDepartment component is rendered when the route is /admin-dashboard/department/:id */}
+          <Route path="employees" element={<List />} />{" "}
+          {/* List component is rendered when the route is /admin-dashboard/employees */}
+          <Route path="add-employee" element={<Add />} />{" "}
+          {/* Add component is rendered when the route is /admin-dashboard/add-employee */}
+          <Route path="employees/:id" element={<View />} />{" "}
+          {/* View component is rendered when the route is /admin-dashboard/employees/:id */}
+          <Route path="employees/edit/:id" element={<Edit />} />{" "}
+          {/* Edit component is rendered when the route is /admin-dashboard/employees/edit/:id */}
+          <Route path="employees/salary/:id" element={<ViewSalary />} />{" "}
+          {/* ViewSalary component is rendered when the route is /admin-dashboard/employees/salary/:id */}
+          <Route path="salary/add" element={<AddSalary />} />{" "}
+          {/* AddSalary component is rendered when the route is /admin-dashboard/salary/add */}
+          <Route path="leaves" element={<Table />} />{" "}
+          {/* Table component is rendered when the route is /admin-dashboard/leaves */}
         </Route>
         <Route
           path="/employee-dashboard"
@@ -61,12 +74,20 @@ function App() {
             </PrivateRoutes>
           }
         >
-          <Route index element={<Summary />} />
-          <Route path="profile/:id" element={<View />} />
-          <Route path="leaves" element={<LeaveList />} />
-          <Route path="add-leave" element={<AddLeave />} />
-          <Route path="salary/:id" element={<ViewSalary />} />
-          <Route path="settings" element={<Setting />} />
+          {" "}
+          {/* EmployeeDashboard component is rendered when the route is /employee-dashboard */}
+          <Route index element={<Summary />} />{" "}
+          {/* Summary component is rendered when the route is /employee-dashboard */}
+          <Route path="profile/:id" element={<View />} />{" "}
+          {/* View component is rendered when the route is /employee-dashboard/profile/:id */}
+          <Route path="leaves" element={<LeaveList />} />{" "}
+          {/* LeaveList component is rendered when the route is /employee-dashboard/leaves */}
+          <Route path="add-leave" element={<AddLeave />} />{" "}
+          {/* AddLeave component is rendered when the route is /employee-dashboard/add-leave */}
+          <Route path="salary/:id" element={<ViewSalary />} />{" "}
+          {/* ViewSalary component is rendered when the route is /employee-dashboard/salary/:id */}
+          <Route path="settings" element={<Setting />} />{" "}
+          {/* Setting component is rendered when the route is /employee-dashboard/settings */}
         </Route>
       </Routes>
     </BrowserRouter>
