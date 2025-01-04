@@ -35,6 +35,7 @@ const addLeave = async (req, res) => {
   }
 };
 
+// Define the function to get the leave by the employee ID
 const getLeave = async (req, res) => {
   try {
     const { id } = req.params; // Get the employee ID from the request parameters
@@ -59,6 +60,7 @@ const getLeave = async (req, res) => {
   }
 };
 
+// Define the function to get all the leaves
 const getLeaves = async (req, res) => {
   try {
     const leaves = await Leave.find().populate({
@@ -84,6 +86,7 @@ const getLeaves = async (req, res) => {
   }
 };
 
+// Define the function to get the leave details by the leave ID
 const getLeaveDetail = async (req, res) => {
   try {
     const { id } = req.params; // Get the leave ID from the request parameters
@@ -109,4 +112,20 @@ const getLeaveDetail = async (req, res) => {
       .json({ success: false, error: "Error when getting leaves" }); // Send the error
   }
 };
-export { addLeave, getLeave, getLeaves, getLeaveDetail };
+
+// Define the function to update the leave status
+const updateLeave = async (req, res) => {
+  try {
+    const { id } = req.params; // Get the leave ID from the request parameters
+    const { status } = req.body; // Get the status from the request body
+
+    await Leave.findByIdAndUpdate({ _id: id }, { status }); // Update the leave status
+
+    return res.status(200).json({ success: true }); // Send the response
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, error: "Error when updating leave status" }); // Send the error
+  }
+};
+export { addLeave, getLeave, getLeaves, getLeaveDetail, updateLeave };

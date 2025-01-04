@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -6,6 +6,7 @@ import axios from "axios";
 const Detail = () => {
   const { id } = useParams(); // Get the id from the URL
   const [leave, setLeave] = useState(null); // Define a state variable to store the employee
+  const navigate = useNavigate(); // Initialize the navigate function from the useNavigate hook
 
   useEffect(() => {
     const fetchLeave = async () => {
@@ -33,6 +34,28 @@ const Detail = () => {
     };
     fetchLeave(); // Call the fetchLeave function to fetch the leave
   }, [id]);
+
+  const changeStatus = async (id, status) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:5000/api/leave/${id}`,
+        { status },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      ); // Make a PUT request to the /api/leave/status/:id endpoint
+
+      if (response.data.success) {
+        navigate("/admin-dashboard/leaves"); // Redirect to the leaves page
+      }
+    } catch (error) {
+      if (error.response && !error.response.data.success) {
+        alert(error.response.data.error); // Log the error message
+      }
+    }
+  }; // Define a function named changeStatus that updates the status of the leave.
 
   return (
     <>
@@ -82,8 +105,28 @@ const Detail = () => {
                 </p>
               </div>
               <div className="flex space-x-3 mb-4">
-                <p className="text-lg font-bold">Status:</p>
-                <p className="font-medium">{leave.status}</p>
+                <p className="text-lg font-bold">
+                  {leave.status === "Pending" ? "Actions:" : "Status:"}{" "}
+                  {/*Display Actions if the status is Pending */}
+                </p>
+                {leave.status === "Pending" ? (
+                  <div className="flex space-x-3">
+                    <button
+                      className="px-2 py-1 bg-green-600 text-white hover:bg-green-800"
+                      onClick={() => changeStatus(leave._id, "Approved")}
+                    >
+                      Approve
+                    </button>
+                    <button
+                      className="px-2 py-1 bg-red-600 text-white hover:bg-red-800"
+                      onClick={() => changeStatus(leave._id, "Rejected")}
+                    >
+                      Reject
+                    </button>
+                  </div>
+                ) : (
+                  <p className="font-medium">{leave.status}</p>
+                )}
               </div>
             </div>
           </div>
