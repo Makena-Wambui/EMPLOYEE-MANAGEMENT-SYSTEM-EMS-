@@ -67,6 +67,8 @@ function App() {
           <Route path="leaves/:id" element={<Detail />} />{" "}
           {/* Detail component is rendered when the route is /admin-dashboard/leaves/:id */}
           <Route path="employees/leaves/:id" element={<LeaveList />} />{" "}
+          {/* LeaveList component is rendered when the route is /admin-dashboard/employees/leaves/:id */}
+          <Route path="settings" element={<Setting />} />{" "}
         </Route>
         <Route
           path="/employee-dashboard"

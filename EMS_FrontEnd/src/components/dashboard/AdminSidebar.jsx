@@ -78,7 +78,7 @@ const AdminSidebar = () => {
         </NavLink>
 
         <NavLink
-          to="/admin-dashboard"
+          to="/admin-dashboard/settings"
           className="flex items-center space-x-4 py-3 px-4 rounded"
         >
           <FaCogs />
