@@ -66,6 +66,7 @@ function App() {
           {/* Table component is rendered when the route is /admin-dashboard/leaves */}
           <Route path="leaves/:id" element={<Detail />} />{" "}
           {/* Detail component is rendered when the route is /admin-dashboard/leaves/:id */}
+          <Route path="employees/leaves/:id" element={<LeaveList />} />{" "}
         </Route>
         <Route
           path="/employee-dashboard"
@@ -83,8 +84,8 @@ function App() {
           {/* Summary component is rendered when the route is /employee-dashboard */}
           <Route path="profile/:id" element={<View />} />{" "}
           {/* View component is rendered when the route is /employee-dashboard/profile/:id */}
-          <Route path="leaves" element={<LeaveList />} />{" "}
-          {/* LeaveList component is rendered when the route is /employee-dashboard/leaves */}
+          <Route path="leaves/:id" element={<LeaveList />} />{" "}
+          {/* LeaveList component is rendered when the route is /employee-dashboard/leaves/:id */}
           <Route path="add-leave" element={<AddLeave />} />{" "}
           {/* AddLeave component is rendered when the route is /employee-dashboard/add-leave */}
           <Route path="salary/:id" element={<ViewSalary />} />{" "}

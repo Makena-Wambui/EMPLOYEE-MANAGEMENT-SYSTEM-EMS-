@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -10,17 +10,20 @@ const List = () => {
   const [leaves, setLeaves] = useState([]); // Define a state variable to store the leaves
   const [loading, setLoading] = useState(true); // Define a state variable for loading
 
+  const { id } = useParams(); // Get the employee ID from the URL
+
   // Define a function to fetch the leaves
   const fetchLeaves = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/leave/${user._id}`,
+        `http://localhost:5000/api/leave/${id}`, // Make a GET request to the /api/leave/:id endpoint
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
+      console.log(response.data);
 
       if (response.data.success) {
         setLeaves(response.data.data); // Set the leaves state variable with the data
@@ -50,13 +53,15 @@ const List = () => {
           placeholder="Search By Status"
           className="px-4 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
         />
-
-        <Link
-          to="/employee-dashboard/add-leave"
-          className="bg-blue-600 text-white px-4 py-1 rounded-lg"
-        >
-          Add New Leave
-        </Link>
+        {user.role === "employee" && (
+          <Link
+            to="/employee-dashboard/add-leave"
+            className="bg-blue-600 text-white px-4 py-1 rounded-lg"
+          >
+            Add New Leave
+          </Link>
+        )}{" "}
+        {/*Add a condition to check if the user role is employee and display the Add New Leave button */}
       </div>
 
       <table className="w-full text-sm text-left text-gray-500 mt-8">

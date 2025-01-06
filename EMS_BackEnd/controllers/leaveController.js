@@ -40,19 +40,14 @@ const getLeave = async (req, res) => {
   try {
     const { id } = req.params; // Get the employee ID from the request parameters
 
-    const employee = await Employee.findOne({ userId: id }); // Find the employee by the user ID
+    let leave = await Leave.find({ employeeId: id }); // Find the leave by the employee ID
 
-    if (!employee) {
-      return res
-        .status(404)
-        .json({ success: false, error: "Employee not found" });
+    if (!leave) {
+      const employee = await Employee.findOne({ userId: id }); // Find the employee by the user ID
+      leave = await Leave.find({ employeeId: employee._id }); // Find the leave by the employee ID
     }
 
-    const leaves = await Leave.find({ employeeId: employee._id }); // Find the leaves by the employee ID
-
-    // console.log("Leaves found:", leaves);
-
-    return res.status(200).json({ success: true, data: leaves }); // Send the response
+    return res.status(200).json({ success: true, data: leave }); // Send the response
   } catch (error) {
     return res
       .status(500)

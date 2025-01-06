@@ -46,7 +46,7 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink
-          to="/employee-dashboard/leaves"
+          to={`/employee-dashboard/leaves/${user._id}`} // Add the user ID to the leaves route
           className={({ isActive }) =>
             `${
               isActive ? "bg-teal-600" : " "
