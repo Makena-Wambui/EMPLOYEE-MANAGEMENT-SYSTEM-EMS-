@@ -8,6 +8,7 @@ import { LeaveButtons, columns } from "../../utils/LeaveHelper"; // Import the L
 
 const Table = () => {
   const [leaves, setLeaves] = useState(null); // Define a state variable to store the leaves
+  const [filteredLeaves, setFilteredLeaves] = useState(null); // Define a state variable to store the filtered leaves
   const fetchLeaves = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/leave", {
@@ -33,6 +34,7 @@ const Table = () => {
           actions: <LeaveButtons Id={leave._id} />,
         }));
         setLeaves(data); // Set the leaves state variable with the fetched leaves
+        setFilteredLeaves(data); // Set the filteredLeaves state variable with the fetched leaves
       }
     } catch (error) {
       if (error.response && !error.response.data.success) {
@@ -48,35 +50,46 @@ const Table = () => {
   useEffect(() => {
     console.log(leaves);
   }, [leaves]);
+
+  const filterByButton = (status) => {
+    const data = leaves.filter((leave) =>
+      leave.status.toLowerCase().includes(status.toLowerCase())
+    ); // Filter the leaves based on the status
+    setFilteredLeaves(data); // Update the filteredLeaves state variable with the filtered data
+  }; // Implement the filter functionality
+
   return (
     <>
-      {leaves ? (
+      {filteredLeaves ? (
         <div>
           <div className="text-center">
             <h3 className="text-2xl font-bold">Manage Leaves</h3>
           </div>
-          <div className="flex justify-between items-center">
-            <input
-              type="text"
-              placeholder="Search By Status"
-              className="px-4 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-            />
-
+          <div className="flex justify-end items-center">
             <div className="space-x-3">
-              <button className="px-2 py-1 bg-orange-600 text-white hover:bg-orange-800">
+              <button
+                className="px-2 py-1 bg-orange-600 text-white hover:bg-orange-800"
+                onClick={() => filterByButton("Pending")}
+              >
                 Pending
               </button>
-              <button className="px-2 py-1 bg-green-600 text-white hover:bg-green-800">
+              <button
+                className="px-2 py-1 bg-green-600 text-white hover:bg-green-800"
+                onClick={() => filterByButton("Approved")}
+              >
                 Approved
               </button>
-              <button className="px-2 py-1 bg-red-600 text-white hover:bg-red-800">
+              <button
+                className="px-2 py-1 bg-red-600 text-white hover:bg-red-800"
+                onClick={() => filterByButton("Rejected")}
+              >
                 Rejected
               </button>
             </div>
           </div>
 
           <div className="mt-5">
-            <DataTable columns={columns} data={leaves} pagination />{" "}
+            <DataTable columns={columns} data={filteredLeaves} pagination />{" "}
             {/*Render the DataTable component with the columns and data props */}
           </div>
         </div>
