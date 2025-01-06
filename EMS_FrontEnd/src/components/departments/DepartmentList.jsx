@@ -12,51 +12,49 @@ const DepartmentList = () => {
   const [filteredDepartments, setFilteredDepartments] = useState([]); // Define a state variable to store the filtered departments
   const [searchValue, setSearchValue] = useState(""); // Search value state
 
-  const onDepartmentDelete = async (id) => {
-    const data = departments.filter((dep) => dep._id !== id); // Filter out the department with the given id
+  const onDepartmentDelete = () => {
+    fetchDepartments(); // Call the fetchDepartments function to fetch the departments after deleting a department
+  };
 
-    setDepartments(data); // Set the departments state variable with the filtered departments
-    setFilteredDepartments(data); // Set the filtered departments state variable with the filtered departments
+  const fetchDepartments = async () => {
+    // Fetch the departments from the backend
+    setDepLoading(true); // Set the loading state to true
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/department/",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      ); // Make a GET request to the /api/department endpoint
+      if (response.data.success) {
+        console.log(response.data);
+        let s_no = 1; // Initialize the serial number
+        const data = await response.data.departments.map((dep) => ({
+          _id: dep._id,
+          s_no: s_no++, // Increment the serial number
+          dep_name: dep.dep_name, // Get the department name
+          actions: (
+            <DepartmentButtons
+              DepId={dep._id}
+              onDepartmentDelete={onDepartmentDelete}
+            />
+          ),
+        }));
+        setDepartments(data); // Set the departments state variable with the fetched departments
+        setFilteredDepartments(data); // Set the filtered departments state variable with the fetched departments
+      }
+    } catch (error) {
+      if (error.response && !error.response.data.success) {
+        alert(error.response.data.error); // Log the error message
+      }
+    } finally {
+      setDepLoading(false); // Set the loading state to false
+    }
   };
   useEffect(() => {
-    const fetchDepartments = async () => {
-      // Fetch the departments from the backend
-      setDepLoading(true); // Set the loading state to true
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/department/",
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        ); // Make a GET request to the /api/department endpoint
-        if (response.data.success) {
-          console.log(response.data);
-          let s_no = 1; // Initialize the serial number
-          const data = await response.data.departments.map((dep) => ({
-            _id: dep._id,
-            s_no: s_no++, // Increment the serial number
-            dep_name: dep.dep_name, // Get the department name
-            actions: (
-              <DepartmentButtons
-                DepId={dep._id}
-                onDepartmentDelete={onDepartmentDelete}
-              />
-            ),
-          }));
-          setDepartments(data); // Set the departments state variable with the fetched departments
-          setFilteredDepartments(data); // Set the filtered departments state variable with the fetched departments
-        }
-      } catch (error) {
-        if (error.response && !error.response.data.success) {
-          alert(error.response.data.error); // Log the error message
-        }
-      } finally {
-        setDepLoading(false); // Set the loading state to false
-      }
-    };
-    fetchDepartments(); // Call the fetchDepartments function to fetch the departments
+    fetchDepartments(); // Call the fetchDepartments function to fetch the departments when the component mounts
   }, []);
 
   const filterDepartments = (e) => {

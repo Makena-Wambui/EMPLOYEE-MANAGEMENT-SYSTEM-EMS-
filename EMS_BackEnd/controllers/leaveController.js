@@ -42,7 +42,7 @@ const getLeave = async (req, res) => {
 
     let leave = await Leave.find({ employeeId: id }); // Find the leave by the employee ID
 
-    if (!leave) {
+    if (!leave || leave.length === 0) {
       const employee = await Employee.findOne({ userId: id }); // Find the employee by the user ID
       leave = await Leave.find({ employeeId: employee._id }); // Find the leave by the employee ID
     }

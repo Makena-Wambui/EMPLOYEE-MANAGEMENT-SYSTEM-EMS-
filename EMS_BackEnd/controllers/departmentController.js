@@ -71,9 +71,12 @@ const deleteDepartment = async (req, res) => {
     const { id } = req.params; // Get the department id from the request parameters
     // const { dep_name, description } = req.body; // Destructure the department name and description from the request body
 
-    const deletedDep = await Department.findByIdAndDelete(
+    const deletedDep = await Department.findById(
       { _id: id } // Find the department by id and delete it
     );
+
+    await deletedDep.deleteOne(); // Delete the department. this calls the pre hook in the department model to delete the employees and leave records by the department ID
+
     return res.status(200).json({
       success: true,
       department: deletedDep,

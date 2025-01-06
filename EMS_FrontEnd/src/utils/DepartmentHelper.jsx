@@ -37,7 +37,7 @@ export const DepartmentButtons = ({ DepId, onDepartmentDelete }) => {
           }
         ); // Make a DELETE request to the /api/department endpoint
         if (response.data.success) {
-          onDepartmentDelete(id); // Call the onDepartmentDelete function to remove the department from the UI
+          onDepartmentDelete(); // Call the onDepartmentDelete function to remove the department from the UI
         }
       } catch (error) {
         if (error.response && error.response.data.error) {
