@@ -37,6 +37,9 @@ const Add = () => {
   };
 
   const handleSubmit = async (e) => {
+    const token = localStorage.getItem("token");
+    console.log(token); // Check if the token is retrieved correctly
+
     e.preventDefault(); // Prevent the default form submission
 
     const formDataObj = new FormData(); // Create a new FormData object
