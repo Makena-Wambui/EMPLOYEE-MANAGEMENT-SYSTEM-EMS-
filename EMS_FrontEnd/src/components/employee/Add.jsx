@@ -62,6 +62,7 @@ const Add = () => {
           headers: {
             Authorization: `Bearer ${token}`, // Set the Authorization header with the token
           },
+          withCredentials: true, // Send cookies along with the request
         }
       ); // Make a POST request to the server to add a new employee
 
