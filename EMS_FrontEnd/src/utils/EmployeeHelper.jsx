@@ -45,11 +45,14 @@ export const fetchDepartments = async () => {
   let departments;
   // Fetch the departments from the backend
   try {
-    const response = await axios.get("http://localhost:5000/api/department/", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }); // Make a GET request to the /api/department endpoint
+    const response = await axios.get(
+      "https://employee-management-system-ems-backend.vercel.app/api/department/",
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    ); // Make a GET request to the /api/department endpoint
     if (response.data.success) {
       departments = response.data.departments; // Get the departments
     }
@@ -66,7 +69,7 @@ export const getEmployees = async (id) => {
   // Fetch the employees from the backend
   try {
     const response = await axios.get(
-      `http://localhost:5000/api/employee/department/${id}`,
+      `https://employee-management-system-ems-backend.vercel.app/api/employee/department/${id}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

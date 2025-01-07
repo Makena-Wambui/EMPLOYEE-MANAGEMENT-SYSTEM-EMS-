@@ -31,7 +31,7 @@ const Add = () => {
     console.log("User:", user); */
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/leave/add`,
+        `https://employee-management-system-ems-backend.vercel.app/api/leave/add`,
         leave,
         {
           headers: {

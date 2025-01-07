@@ -15,11 +15,14 @@ const List = () => {
       // Fetch the departments from the backend
       setEmpLoading(true); // Set the loading state to true
       try {
-        const response = await axios.get("http://localhost:5000/api/employee", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }); // Make a GET request to the /api/employee endpoint
+        const response = await axios.get(
+          "https://employee-management-system-ems-backend.vercel.app/api/employee",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        ); // Make a GET request to the /api/employee endpoint
 
         if (response.data.success) {
           let s_no = 1; // Initialize the serial number
@@ -32,7 +35,7 @@ const List = () => {
             profileImage: (
               <img
                 width={40}
-                src={`http://localhost:5000/${emp.userId.profileImage}`}
+                src={`https://employee-management-system-ems-backend.vercel.app/${emp.userId.profileImage}`}
                 className="rounded-full"
               />
             ), // Get the employee profile image
