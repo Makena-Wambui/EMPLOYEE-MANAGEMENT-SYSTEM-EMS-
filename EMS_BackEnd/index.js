@@ -14,10 +14,12 @@ const app = express(); // create express app
 
 app.use(
   cors({
-    origin: "https://employee-management-system-ems-front.vercel.app",
-    credentials: true,
+    origin: "https://employee-management-system-ems-front.vercel.app", // Allow your frontend domain
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
   })
-); // enable cors for all requests to the server to allow requests from any origin
+);
+// enable cors for all requests to the server to allow requests from any origin
 
 app.use(express.json()); // enable parsing of json request bodies
 
