@@ -7,7 +7,7 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      "jwt-decode": import.meta.resolve("jwt-decode"),
+      "jwt-decode": "jwt-decode", // Just point directly to the package name
     },
   },
 });
