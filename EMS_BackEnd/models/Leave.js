@@ -32,7 +32,7 @@ const leaveSchema = new Schema({
 
   status: {
     type: String,
-    enum: ["Pending", "Approved", "Rejected"],
+    enum: ["Pending", "Approved", "Rejected"], // we use enum to restrict the values that can be stored in the status field
     default: "Pending",
   },
 
