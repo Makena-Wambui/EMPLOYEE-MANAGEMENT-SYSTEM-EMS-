@@ -38,11 +38,12 @@ const addLeave = async (req, res) => {
 // Define the function to get the leave by the employee ID
 const getLeave = async (req, res) => {
   try {
-    const { id } = req.params; // Get the employee ID from the request parameters
+    const { id, role } = req.params; // Get the employee ID from the request parameters
+    let leave;
 
-    let leave = await Leave.find({ employeeId: id }); // Find the leave by the employee ID
-
-    if (!leave || leave.length === 0) {
+    if (role === "admin") {
+      leave = await Leave.find({ employeeId: id }); // Find the leave by the employee ID
+    } else {
       const employee = await Employee.findOne({ userId: id }); // Find the employee by the user ID
       leave = await Leave.find({ employeeId: employee._id }); // Find the leave by the employee ID
     }
@@ -95,7 +96,7 @@ const getLeaveDetail = async (req, res) => {
 
         {
           path: "userId",
-          select: "name, profileImage",
+          select: "name profileImage",
         },
       ],
     }); // Find the leave by the ID and populate the employee ID field

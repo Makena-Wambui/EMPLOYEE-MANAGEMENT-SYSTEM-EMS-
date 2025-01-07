@@ -144,7 +144,7 @@ const Edit = () => {
                 />
               </div>
 
-              {/* Salary */}
+              {/* Salary 
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Salary
@@ -159,6 +159,7 @@ const Edit = () => {
                   required
                 />
               </div>
+              */}
 
               {/* Department */}
               <div className="col-span-2">

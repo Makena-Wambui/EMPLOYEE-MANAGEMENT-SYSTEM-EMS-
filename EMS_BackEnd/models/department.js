@@ -23,6 +23,9 @@ departmentSchema.pre(
 
       await Employee.deleteMany({ department: this._id }); // Delete the employees by the department ID
 
+      // Delete the user records by the employee IDs
+      await Employee.deleteMany({ _id: { $in: employeeIds } });
+
       await Leave.deleteMany({ employeeId: { $in: employeeIds } }); // Delete the leave records by the employee IDs
 
       await Salary.deleteMany({ employeeId: { $in: employeeIds } }); // Delete the salary records by the employee IDs

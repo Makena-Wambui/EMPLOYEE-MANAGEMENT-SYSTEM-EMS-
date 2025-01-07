@@ -7,6 +7,7 @@ import connectToDatabase from "./database/database.js";
 import salaryRouter from "./routes/salary.js";
 import leaveRouter from "./routes/leave.js";
 import settingRouter from "./routes/setting.js";
+import dashboardRouter from "./routes/dashboard.js";
 
 connectToDatabase(); // connect to the database
 const app = express(); // create express app
@@ -30,6 +31,8 @@ app.use("/api/leave", leaveRouter); // use the leaveRouter for all requests to t
 //app.use("/api/leaves", leaveRouter); // use the leaveRouter for all requests to the /leaves endpoint
 
 app.use("/api/setting", settingRouter); // use the settingRouter for all requests to the /setting endpoint
+
+app.use("/api/dashboard", dashboardRouter); // use the dashboardRouter for all requests to the /dashboard endpoint
 
 app.listen(process.env.PORT, () => {
   /*

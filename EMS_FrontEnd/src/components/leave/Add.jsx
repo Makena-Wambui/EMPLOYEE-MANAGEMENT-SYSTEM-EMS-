@@ -40,7 +40,7 @@ const Add = () => {
         }
       ); // Make a POST request to the /api/leave/add endpoint
       if (response.data.success) {
-        navigate("/employee-dashboard/leaves"); // Redirect to the leaves page
+        navigate(`/employee-dashboard/leaves/${user._id}`); // Redirect to the leaves page
       }
     } catch (error) {
       if (error.response && !error.response.data.success) {

@@ -22,21 +22,26 @@ const addSalary = async (req, res) => {
 
     await newSalary.save(); // Save the salary
 
-    res.status(200).json({ success: true }); // Send the response
+    return res.status(200).json({ success: true }); // Send the response
   } catch (err) {
-    res.status(500).json({ success: false, error: "Error when adding salary" }); // Send the error
+    return res
+      .status(500)
+      .json({ success: false, error: "Error when adding salary" }); // Send the error
   }
 };
 
 const getSalary = async (req, res) => {
   try {
-    const { id } = req.params; // Get the employee id from the request params
-    let salary = await Salary.find({ employeeId: id }).populate(
-      "employeeId",
-      "employeeId"
-    ); // Find the salary history of the employee with the given id
+    const { id, role } = req.params; // Get the employee id and role from the request params
 
-    if (!salary || salary.length < 1) {
+    let salary;
+
+    if (role === "admin") {
+      salary = await Salary.find({ employeeId: id }).populate(
+        "employeeId",
+        "employeeId"
+      ); // Find the salary history of the employee with the given id
+    } else {
       const employee = await Employee.findOne({ userId: id }); // Find the employee by the user ID
 
       if (!employee) {

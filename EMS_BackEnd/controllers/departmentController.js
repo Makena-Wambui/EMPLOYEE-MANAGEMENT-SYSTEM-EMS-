@@ -27,7 +27,7 @@ const addDepartment = async (req, res) => {
       message: "Department added successfully",
     }); // Return a success response with status code 200
   } catch (error) {
-    res.status(500).json({ error: "Server error in add department" }); // Return an error response with status code 500
+    return res.status(500).json({ error: "Server error in add department" }); // Return an error response with status code 500
   }
 };
 
@@ -41,7 +41,7 @@ const getDepartment = async (req, res) => {
 
     return res.status(200).json({ success: true, department }); // Return a success response with status code 200
   } catch (error) {
-    res.status(500).json({ error: "Server error in get department" }); // Return an error response with status code 500
+    return res.status(500).json({ error: "Server error in get department" }); // Return an error response with status code 500
   }
 };
 
@@ -62,7 +62,7 @@ const updateDepartment = async (req, res) => {
       message: "Department updated successfully",
     }); // Return a success response with status code 200
   } catch (error) {
-    res.status(500).json({ error: "Server error in update department" }); // Return an error response with status code 500
+    return res.status(500).json({ error: "Server error in update department" }); // Return an error response with status code 500
   }
 };
 
@@ -83,7 +83,7 @@ const deleteDepartment = async (req, res) => {
       message: "Department deleted successfully",
     }); // Return a success response with status code 200
   } catch (error) {
-    res.status(500).json({ error: "Server error in delete department" }); // Return an error response with status code 500
+    return res.status(500).json({ error: "Server error in delete department" }); // Return an error response with status code 500
   }
 };
 

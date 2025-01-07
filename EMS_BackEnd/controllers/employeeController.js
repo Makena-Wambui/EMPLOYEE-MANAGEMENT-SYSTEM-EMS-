@@ -95,7 +95,7 @@ const getEmployees = async (req, res) => {
       employees,
     }); // Return a success response with status code 200
   } catch (error) {
-    res.status(500).json({ error: "Server error in get employees" }); // Return an error response with status code 500
+    return res.status(500).json({ error: "Server error in get employees" }); // Return an error response with status code 500
   }
 };
 
@@ -118,7 +118,7 @@ const getEmployee = async (req, res) => {
       employee,
     }); // Return a success response with status code 200
   } catch (error) {
-    res.status(500).json({ error: "Server error in get employees" }); // Return an error response with status code 500
+    return res.status(500).json({ error: "Server error in get employees" }); // Return an error response with status code 500
   }
 };
 
@@ -161,7 +161,7 @@ const updateEmployee = async (req, res) => {
       message: "Employee updated successfully",
     }); // Return a success response with status code 200
   } catch (error) {
-    res.status(500).json({ error: "Server error in updating employee" }); // Return an error response with status code 500
+    return res.status(500).json({ error: "Server error in updating employee" }); // Return an error response with status code 500
   }
 };
 
@@ -175,7 +175,7 @@ const fetchEmployeesByDepId = async (req, res) => {
       employees,
     }); // Return a success response with status code 200
   } catch (error) {
-    res
+    return res
       .status(500)
       .json({ error: "Server error when getting employees by Department Id" }); // Return an error response with status code 500
   }

@@ -53,14 +53,14 @@ const login = async (req, res) => {
     );
 
     // send the token and user data in the response
-    res.status(200).json({
+    return res.status(200).json({
       token,
       user: { _id: user._id, name: user.name, role: user.role },
     });
   } catch (error) {
     //console.log(error);
     // send a response with status 500 for any server error
-    res.status(500).json({ success: false, error: error.message });
+    return res.status(500).json({ success: false, error: error.message });
   }
 };
 
