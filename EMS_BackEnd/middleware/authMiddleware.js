@@ -10,11 +10,6 @@ const verifyUser = async (req, res, next) => {
         .status(404)
         .json({ success: false, error: "Token Not Provided" }); // If the token is not present, return an error response
     }
-
-    if (req.url === "api/employee/add") {
-      return next(); // Call the next middleware
-    }
-
     const decoded = jwt.verify(token, process.env.JWT_KEY); // Verify the token using the JWT_SECRET
 
     if (!decoded) {
