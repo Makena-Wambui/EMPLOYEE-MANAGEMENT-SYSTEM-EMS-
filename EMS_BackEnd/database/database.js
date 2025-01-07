@@ -1,22 +1,24 @@
 // create a connection to the database
+import dotenv from "dotenv";
+dotenv.config();
 
 import mongoose from "mongoose";
 
-// create a function to connect to the database
 const connectToDatabase = async () => {
   try {
-    // connect to the MongoDB database
-    const conn = await mongoose.connect(process.env.MONGO_URI);
-
-    // log the connection status
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
+    const uri = process.env.MONGO_URI;
+    if (!uri) {
+      throw new Error("MONGO_URI is not defined");
+    }
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to MongoDB");
   } catch (error) {
-    // log the error
-    console.log(`Error: ${error.message}`);
-    // exit with failure
-    process.exit(1);
+    console.error("Error connecting to MongoDB:", error);
+    process.exit(1); // Exit the process with failure
   }
 };
 
-// export the function to connect to the database
 export default connectToDatabase;
