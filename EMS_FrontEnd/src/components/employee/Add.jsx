@@ -39,14 +39,6 @@ const Add = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission
 
-    const token = localStorage.getItem("token"); // Get the token from the local storage
-    console.log(token); // Check if the token is retrieved correctly
-
-    if (!token) {
-      alert("No token provided. Please log in.");
-      return;
-    }
-
     const formDataObj = new FormData(); // Create a new FormData object
 
     Object.keys(formData).forEach((key) => {
@@ -60,9 +52,8 @@ const Add = () => {
         formDataObj,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Set the Authorization header with the token
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-          withCredentials: true, // Send cookies along with the request
         }
       ); // Make a POST request to the server to add a new employee
 
