@@ -69,7 +69,8 @@ const Add = () => {
       }
     } catch (error) {
       if (error.response && error.response.data.error) {
-        alert(error.response.data.error);
+        console.error("Error response:", error.response); // Log the full error response
+        console.error("Error message:", error.message); // Log the error message
       }
     }
   };
