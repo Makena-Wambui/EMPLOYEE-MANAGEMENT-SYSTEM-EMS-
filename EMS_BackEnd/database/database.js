@@ -7,6 +7,8 @@ import mongoose from "mongoose";
 const connectToDatabase = async () => {
   try {
     const uri = process.env.MONGO_URI;
+
+    // check if the MONGO_URI is defined
     if (!uri) {
       throw new Error("MONGO_URI is not defined");
     }
