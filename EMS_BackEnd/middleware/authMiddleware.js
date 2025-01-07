@@ -11,7 +11,7 @@ const verifyUser = async (req, res, next) => {
         .json({ success: false, error: "Token Not Provided" }); // If the token is not present, return an error response
     }
 
-    const decoded = await jwt.verify(token, process.env.JWT_KEY); // Verify the token using the JWT_SECRET
+    const decoded = jwt.verify(token, process.env.JWT_KEY); // Verify the token using the JWT_SECRET
 
     if (!decoded) {
       return res.status(404).json({ success: false, error: "Token Invalid" });
