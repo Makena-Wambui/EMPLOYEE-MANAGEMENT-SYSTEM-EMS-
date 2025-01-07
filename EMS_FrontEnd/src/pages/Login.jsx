@@ -33,9 +33,9 @@ const Login = () => {
       );
       // console.log(response);
       if (response.data.token) {
-        // alert("Login Successful"); // If the response contains a token, display a success message.
-        login(response.data.user); // Call the login function with the user object from the response.
-        localStorage.setItem("token", response.data.token); // Store the token in local storage.
+        console.log("Token received:", response.data.token); // Log the token to ensure it's being received
+        localStorage.setItem("token", response.data.token); // Store the token in local storage
+        login(response.data.user); // Call the login function with the user object from the response
 
         if (response.data.user.role === "admin") {
           // Redirect the user to the admin dashboard if the user is an admin.
