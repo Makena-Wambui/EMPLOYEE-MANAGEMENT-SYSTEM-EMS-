@@ -52,8 +52,6 @@ const Add = () => {
         formDataObj,
         {
           withCredentials: true,
-        },
-        {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
