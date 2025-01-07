@@ -51,6 +51,9 @@ const Add = () => {
         "https://employee-management-system-ems-backend.vercel.app/api/employee/add",
         formDataObj,
         {
+          withCredentials: true,
+        },
+        {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
