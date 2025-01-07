@@ -12,13 +12,15 @@ import dashboardRouter from "./routes/dashboard.js";
 connectToDatabase(); // connect to the database
 const app = express(); // create express app
 
-app.use(
-  cors({
-    origin: "https://employee-management-system-ems-front.vercel.app", // Allow your frontend domain
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-  })
-);
+// CORS configuration
+const corsOptions = {
+  origin: "https://employee-management-system-ems-front.vercel.app", // Allow your frontend origin
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, // Allow credentials (cookies, authorization headers)
+};
+
+app.use(cors(corsOptions));
 // enable cors for all requests to the server to allow requests from any origin
 
 app.use(express.json()); // enable parsing of json request bodies
