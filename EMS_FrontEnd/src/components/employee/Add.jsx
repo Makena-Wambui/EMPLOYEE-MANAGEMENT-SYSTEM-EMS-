@@ -46,6 +46,12 @@ const Add = () => {
       formDataObj.append(key, formData[key]); // Append the key and value to the formDataObj
     });
 
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Token not found. Please log in again.");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "https://employee-management-system-ems-backend.vercel.app/api/employee/add",
@@ -53,7 +59,7 @@ const Add = () => {
         {
           withCredentials: true,
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       ); // Make a POST request to the server to add a new employee
