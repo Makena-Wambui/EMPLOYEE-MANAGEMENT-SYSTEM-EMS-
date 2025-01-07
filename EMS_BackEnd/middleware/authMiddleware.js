@@ -4,6 +4,7 @@ import User from "../models/user.js";
 const verifyUser = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.split(" ")[1]; // Use optional chaining
+    console.log("Extracted token:", token);
     if (!token) {
       return res
         .status(404)
