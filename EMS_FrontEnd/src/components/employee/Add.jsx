@@ -54,7 +54,7 @@ const Add = () => {
 
     try {
       const response = await axios.post(
-        "https://employee-management-system-ems-backend.vercel.app/api/employee/add",
+        "http://localhost:5000/api/employee/add",
         formDataObj,
         {
           withCredentials: true,

@@ -25,7 +25,7 @@ const Login = () => {
     try {
       // Send a POST request to the /api/auth/login endpoint with the email and password in the request body.
       const response = await axios.post(
-        "https://employee-management-system-ems-backend.vercel.app/api/auth/login",
+        "http://localhost:5000/api/auth/login",
         {
           email,
           password,

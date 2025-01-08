@@ -48,7 +48,7 @@ const EditDepartment = () => {
 
     try {
       const response = await axios.put(
-        `https://employee-management-system-ems-backend.vercel.app/api/department/${id}`,
+        `http://localhost:5000/api/department/${id}`,
         department,
         {
           headers: {

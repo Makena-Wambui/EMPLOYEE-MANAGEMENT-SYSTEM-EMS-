@@ -38,7 +38,7 @@ const Detail = () => {
   const changeStatus = async (id, status) => {
     try {
       const response = await axios.put(
-        `https://employee-management-system-ems-backend.vercel.app/api/leave/${id}`,
+        `http://localhost:5000/api/leave/${id}`,
         { status },
         {
           headers: {
@@ -65,7 +65,7 @@ const Detail = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <img
-                src={`https://employee-management-system-ems-backend.vercel.app/${leave.employeeId.userId.profileImage}`}
+                src={`http://localhost:5000/${leave.employeeId.userId.profileImage}`}
                 className="rounded-full border w-72"
                 alt="Profile"
               />

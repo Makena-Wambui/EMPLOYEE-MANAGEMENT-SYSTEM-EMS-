@@ -11,14 +11,11 @@ const Table = () => {
   const [filteredLeaves, setFilteredLeaves] = useState(null); // Define a state variable to store the filtered leaves
   const fetchLeaves = async () => {
     try {
-      const response = await axios.get(
-        "https://employee-management-system-ems-backend.vercel.app/api/leave",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      ); // Make a GET request to the /api/leave endpoint
+      const response = await axios.get("http://localhost:5000/api/leave", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }); // Make a GET request to the /api/leave endpoint
       console.log(response.data);
       if (response.data.success) {
         // Design the table to display the list of leaves

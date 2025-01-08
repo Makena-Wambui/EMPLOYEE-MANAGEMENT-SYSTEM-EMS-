@@ -18,7 +18,7 @@ const AuthContext = ({ children }) => {
 
         if (token) {
           const response = await axios.get(
-            "https://employee-management-system-ems-backend.vercel.app/api/auth/verify", // Send a GET request to the /api/auth/verify endpoint to verify the user
+            "http://localhost:5000/api/auth/verify", // Send a GET request to the /api/auth/verify endpoint to verify the user
             {
               headers: {
                 Authorization: `Bearer ${token}`, // Send the token stored in local storage as an Authorization header

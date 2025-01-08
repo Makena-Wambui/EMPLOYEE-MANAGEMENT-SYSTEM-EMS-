@@ -26,7 +26,6 @@ const verifyUser = async (req, res, next) => {
 
     next(); // Call the next middleware
   } catch (error) {
-    console.error("Error stack:", error); // Log the error stack
     return res.status(500).json({ success: false, error: "Server Error" });
   }
 };

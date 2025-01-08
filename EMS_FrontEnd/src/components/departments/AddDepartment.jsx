@@ -23,7 +23,7 @@ const AddDepartment = () => {
 
     try {
       const response = await axios.post(
-        "https://employee-management-system-ems-backend.vercel.app/api/department/add",
+        "http://localhost:5000/api/department/add",
         department,
         {
           headers: {
