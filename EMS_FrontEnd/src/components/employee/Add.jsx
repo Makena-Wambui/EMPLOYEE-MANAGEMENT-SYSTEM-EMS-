@@ -57,7 +57,6 @@ const Add = () => {
         "http://localhost:5000/api/employee/add",
         formDataObj,
         {
-          withCredentials: true,
           headers: {
             Authorization: `Bearer ${token}`,
           },
