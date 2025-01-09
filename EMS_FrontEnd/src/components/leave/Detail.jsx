@@ -13,7 +13,7 @@ const Detail = () => {
       // Fetch the leave from the backend
       try {
         const response = await axios.get(
-          `https://employee-management-system-ems-backend.vercel.app/api/leave/detail/${id}`,
+          `http://localhost:5000/api/leave/detail/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
